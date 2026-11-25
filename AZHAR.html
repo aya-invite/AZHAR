@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Для Ажар ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b090e;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.09);
+            --accent-pink: #ff5e8e;
+            --accent-gold: #f6d365;
+            --text-main: #f5f3f7;
+            --text-muted: #a69eb0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Живой фоновый свет */
+        .ambient-light {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+            animation: floatOrb 14s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #ff4b82, transparent 70%);
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #6a3093, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, #f6d365, transparent 70%);
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.18;
+            animation-duration: 18s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 40px) scale(1.15); }
+        }
+
+        /* Контейнер */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 32px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        /* Шапка с датой и именем */
+        header {
+            text-align: center;
+            margin-bottom: 2px;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(255, 94, 142, 0.12);
+            border: 1px solid rgba(255, 94, 142, 0.25);
+            color: #ff8fb1;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 20%, #ffc2d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* Стеклянные карточки */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+        .card:nth-child(5) { animation-delay: 0.4s; }
+        .card:nth-child(6) { animation-delay: 0.5s; }
+
+        .card-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-pink);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-text {
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        /* Таймер отношений */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .timer-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 12px 4px;
+        }
+
+        .timer-num {
+            display: block;
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-unit {
+            display: block;
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Выделенная цитата / письмо */
+        .letter-box {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .letter-box:hover {
+            border-color: rgba(255, 94, 142, 0.35);
+        }
+
+        .letter-hidden {
+            filter: blur(6px);
+            user-select: none;
+            transition: filter 0.5s ease;
+        }
+
+        .letter-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(11, 9, 14, 0.45);
+            border-radius: 24px;
+            transition: opacity 0.4s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .letter-overlay.opened {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tap-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Интерактивное сердце */
+        .pulse-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 6px 0 2px;
+        }
+
+        .heart-btn {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff5e8e, #ff2a6d);
+            border: none;
+            color: white;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 28px rgba(255, 42, 109, 0.45);
+            transition: transform 0.15s ease;
+            animation: heartbeat 2.2s infinite;
+        }
+
+        .heart-btn:active {
+            transform: scale(0.88);
+        }
+
+        .heart-hint {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.08); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.05); }
+        }
+
+        /* Кнопка Telegram */
+        .tg-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px 24px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ff5e8e 0%, #d93870 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 12px 30px rgba(255, 94, 142, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.65s forwards;
+        }
+
+        .tg-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 35px rgba(255, 94, 142, 0.5);
+        }
+
+        .tg-button:active {
+            transform: scale(0.98);
+        }
+
+        .tg-icon {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.28);
+            margin-top: 6px;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Всплывающие сердечки при нажатии */
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 999;
+            animation: flyUp 1.4s ease-out forwards;
+        }
+
+        @keyframes flyUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-140px) scale(1.4);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-light">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="date-badge" id="current-date">Загрузка даты...</div>
+            <h1>Для тебя, Ажар</h1>
+            <p class="subtitle">Обновляется каждое утро специально для тебя</p>
+        </header>
+
+        <!-- Счётчик отношений -->
+        <div class="card">
+            <div class="card-label">
+                <span>∞</span> Мы вместе с 13 ноября
+            </div>
+            <div class="timer-grid">
+                <div class="timer-item">
+                    <span class="timer-num" id="t-days">0</span>
+                    <span class="timer-unit" id="u-days">дней</span>
+                </div>
+                <div class="timer-item">
+                    <span class="timer-num" id="t-hours">00</span>
+                    <span class="timer-unit" id="u-hours">часов</span>
+                </div>
+                <div class="timer-item">
+                    <span class="timer-num" id="t-mins">00</span>
+                    <span class="timer-unit" id="u-mins">минут</span>
+                </div>
+                <div class="timer-item">
+                    <span class="timer-num" id="t-secs">00</span>
+                    <span class="timer-unit" id="u-secs">секунд</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок 1: Пожелание на сегодня -->
+        <div class="card">
+            <div class="card-label">
+                <span>✦</span> Пожелание на сегодня
+            </div>
+            <p class="card-text" id="daily-wish"></p>
+        </div>
+
+        <!-- Блок 2: Почему я выбрал именно тебя -->
+        <div class="card">
+            <div class="card-label">
+                <span>✦</span> Почему я выбрал тебя
+            </div>
+            <p class="card-text" id="daily-reason"></p>
+        </div>
+
+        <!-- Блок 3: Скрытое письмо дня -->
+        <div class="card letter-box" id="letter-card" onclick="openLetter()">
+            <div class="card-label">
+                <span>✉</span> Письмо дня (нажми, чтобы прочитать)
+            </div>
+            <p class="card-text letter-hidden" id="daily-letter"></p>
+            <div class="letter-overlay" id="letter-overlay">
+                <div class="tap-pill">
+                    <span>💌</span> Коснись, чтобы открыть конверт
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок 4: Интерактив -->
+        <div class="card">
+            <div class="pulse-area">
+                <button class="heart-btn" id="heart-btn" aria-label="Отправить тепло">♥</button>
+                <span class="heart-hint" id="heart-counter">Нажми, если скучаешь</span>
+            </div>
+        </div>
+
+        <!-- Главная кнопка перехода в Telegram -->
+        <a href="#" id="tg-link" class="tg-button" target="_blank" rel="noopener noreferrer">
+            <svg class="tg-icon" viewBox="0 0 24 24">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            Напиши мне в Telegram
+        </a>
+
+        <footer>
+            Сделано с любовью • Новый выпуск завтра в 00:00
+        </footer>
+    </div>
+
+    <script>
+        // ==========================================
+        // НАСТРОЙКИ (ВСТАВЬ СЮДА СВОЙ НИК В ТГ БЕЗ @)
+        // ==========================================
+        const TELEGRAM_USERNAME = "dominc4"; 
+
+        // Дата начала отношений: 13 ноября 2026
+        const START_DATE = new Date(2026, 10, 13, 0, 0, 0); // Месяцы в JS с 0 (10 = ноябрь)
+
+        // ==========================================
+        // БАЗА ПОЖЕЛАНИЙ НА КАЖДЫЙ ДЕНЬ
+        // ==========================================
+        const wishes = [
+            "Ажар, пусть этот день будет таким же светлым и красивым, как твоя улыбка. Не переживай ни о чём по пустякам — я всегда рядом и на твоей стороне.",
+            "Желаю тебе сегодня поймать самое лёгкое и тёплое настроение. Пусть все дела решаются сами собой, а вечером тебя ждёт заслуженный отдых.",
+            "Пусть сегодняшний день принесёт тебе пару неожиданных приятных мелочей, от которых захочется улыбнуться просто так. Береги себя, родная.",
+            "Ажар, помни, что ты невероятная. Пусть сегодня у тебя хватит энергии на всё задуманное, а я всегда готов подставить плечо.",
+            "Желаю, чтобы этот день прошёл спокойно, уютно и без лишней суеты. Просто знай: кто-то прямо сейчас думает о тебе с большой теплотой.",
+            "Пусть сегодня всё складывается в твою пользу. Никуда не спеши, пей вкусный кофе или чай и наслаждайся моментом.",
+            "Ажар, пусть этот день подарит тебе вдохновение и внутреннее спокойствие. Ты заслуживаешь только самого лучшего отношения и самых тёплых слов.",
+            "Желаю тебе лёгкости во всём, за что бы ты сегодня ни взялась. Если вдруг устанешь — просто напиши мне, я всегда выслушаю.",
+            "Пусть сегодняшний день будет наполнен маленькими радостями. Улыбнись своему отражению — ты прекрасна.",
+            "Ажар, желаю тебе сегодня чувствовать себя самой счастливой и защищённой. Что бы ни происходило вокруг, моё тепло всегда с тобой.",
+            "Пусть этот день пролетит незаметно и оставит после себя только приятные эмоции. Жду момента, когда мы снова поговорим или увидимся.",
+            "Желаю тебе сегодня побольше поводов для искреннего смеха. Твой голос и твой смех делают любой день в разы лучше.",
+            "Пусть сегодня никакие мелочи не испортят тебе настрой. Ты сильнее и мудрее, чем иногда сама думаешь.",
+            "Ажар, пусть каждый час сегодняшнего дня приносит тебе ощущение уюта и гармонии. Я очень ценю всё, что между нами есть.",
+            "Желаю, чтобы сегодня тебе везло во всём — от зелёного света на светофорах до самых важных решений."
+        ];
+
+        // ==========================================
+        // БАЗА ПРИЧИН «ПОЧЕМУ Я ВЫБРАЛ ТЕБЯ»
+        // ==========================================
+        const reasons = [
+            "Я выбрал тебя, потому что рядом с тобой мир перестаёт шуметь. С тобой можно быть настоящим, без масок и лишних слов.",
+            "За твой взгляд, в котором я каждый раз нахожу спокойствие и невероятную глубину. На тебя хочется смотреть бесконечно.",
+            "Потому что ты умеешь превращать самый обычный, серый день в особенное воспоминание просто своим присутствием.",
+            "Я выбрал тебя за твою искренность. В мире, где все пытаются казаться кем-то другим, ты остаёшься собой — живой, настоящей и тёплой.",
+            "За то, как ты умеешь слушать и понимать без лишних объяснений. Это редкий дар, и он есть у тебя.",
+            "Потому что твоя улыбка — это лучшее, что я видел. Ради неё хочется становиться сильнее и делать больше.",
+            "Я выбрал тебя, потому что мне с тобой легко. Даже молчание вдвоём с тобой ощущается как самый лучший диалог.",
+            "За твою нежность, которая удивительным образом сочетается с внутренним стержнем и характером.",
+            "Потому что из миллионов людей именно ты зацепила меня так, что остальные перестали существовать.",
+            "Я выбрал тебя за твоё доброе сердце и то, как трепетно ты относишься к важным для тебя людям.",
+            "Потому что когда я думаю о будущем, мне хочется видеть в нём именно тебя — твои глаза, твой смех и наши общие моменты.",
+            "За то ощущение дома и тепла, которое появляется каждый раз, когда от тебя приходит сообщение.",
+            "Я выбрал тебя, потому что ты вдохновляешь меня не словами, а просто тем, какая ты есть.",
+            "За твою женственность, естественную красоту и ту особенную ауру, которая притягивает с первой секунды.",
+            "Потому что с тобой хочется делить всё: и громкие победы, и тихие вечера."
+        ];
+
+        // ==========================================
+        // БАЗА ПИСЕМ ДНЯ (СЕКРЕТНЫЙ КОНВЕРТ)
+        // ==========================================
+        const letters = [
+            "Ажар, я редко говорю такие вещи вслух сразу, но я правда благодарен судьбе за то, что ты появилась в моей жизни. Ты делаешь меня лучше просто тем, что ты рядом.",
+            "Если бы мне снова дали выбор из всех людей на земле, я бы не раздумывая снова прошёл весь путь, чтобы встретить именно тебя.",
+            "Знаешь, иногда среди дня я ловлю себя на мысли о тебе — и на душе сразу становится теплее. Береги себя, ты мне очень дорога.",
+            "Мне нравится в тебе всё: от того, как ты говоришь, до твоих маленьких привычек. Ты — мой самый любимый человек.",
+            "Хочу, чтобы ты всегда помнила: у тебя есть человек, которому не всё равно. Я рядом, что бы ни случилось.",
+            "Ты — лучшее, что случалось со мной за последнее время. Спасибо за твою теплоту, за твоё доверие и за то, что ты есть.",
+            "Иногда слов не хватает, чтобы описать, насколько сильно ты мне нравишься. Поэтому я просто сделал этот маленький сайт, чтобы ты чувствовала это каждый день.",
+            "Ажар, ты заслуживаешь, чтобы тебя любили искренне, бережно и по-настоящему. И я хочу быть тем, кто будет это делать.",
+            "Даже если между нами сейчас километры или занятой день — мысленно я обнимаю тебя прямо сейчас.",
+            "Напиши мне прямо сейчас, как проходит твой день. Мне правда важно знать, как ты себя чувствуешь."
+        ];
+
+        // Склонение слов (день/дня/дней и т.д.)
+        function declOfNum(n, titles) {
+            return titles[(n % 10 === 1 && n % 100 !== 11) ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
+        }
+
+        // Обновление таймера каждую секунду
+        function updateTimer() {
+            const now = new Date();
+            const diff = Math.max(0, now - START_DATE);
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / 1000 / 60) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('t-days').textContent = days;
+            document.getElementById('t-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('t-mins').textContent = String(mins).padStart(2, '0');
+            document.getElementById('t-secs').textContent = String(secs).padStart(2, '0');
+
+            document.getElementById('u-days').textContent = declOfNum(days, ['день', 'дня', 'дней']);
+            document.getElementById('u-hours').textContent = declOfNum(hours, ['час', 'часа', 'часов']);
+            document.getElementById('u-mins').textContent = declOfNum(mins, ['минута', 'минуты', 'минут']);
+            document.getElementById('u-secs').textContent = declOfNum(secs, ['секунда', 'секунды', 'секунд']);
+        }
+
+        // Инициализация контента дня
+        function initDailyContent() {
+            const now = new Date();
+            
+            const options = { day: 'numeric', month: 'long', weekday: 'long' };
+            let formattedDate = now.toLocaleDateString('ru-RU', options);
+            formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+            document.getElementById('current-date').textContent = formattedDate;
+
+            const startOfYear = new Date(now.getFullYear(), 0, 0);
+            const diff = now - startOfYear;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+
+            const wishIndex = dayOfYear % wishes.length;
+            const reasonIndex = (dayOfYear + 3) % reasons.length;
+            const letterIndex = (dayOfYear + 7) % letters.length;
+
+            document.getElementById('daily-wish').textContent = wishes[wishIndex];
+            document.getElementById('daily-reason').textContent = reasons[reasonIndex];
+            document.getElementById('daily-letter').textContent = letters[letterIndex];
+
+            const defaultMessage = encodeURIComponent("Привет! Зашла на наш сайт ❤️");
+            const tgUrl = `https://t.me/${TELEGRAM_USERNAME}?text=${defaultMessage}`;
+            document.getElementById('tg-link').href = tgUrl;
+        }
+
+        // Открытие секретного письма
+        function openLetter() {
+            const text = document.getElementById('daily-letter');
+            const overlay = document.getElementById('letter-overlay');
+            text.classList.remove('letter-hidden');
+            overlay.classList.add('opened');
+        }
+
+        // Интерактив с сердечком
+        let tapCount = 0;
+        const heartBtn = document.getElementById('heart-btn');
+        const heartCounter = document.getElementById('heart-counter');
+
+        heartBtn.addEventListener('click', () => {
+            tapCount++;
+            
+            if (tapCount === 1) {
+                heartCounter.textContent = "Сигнал отправлен в космос ✨";
+            } else if (tapCount < 5) {
+                heartCounter.textContent = `Отправлено тепла: ${tapCount} раз(а) ♥`;
+            } else if (tapCount < 15) {
+                heartCounter.textContent = `Очень сильно скучаешь (${tapCount}) — пора написать мне!`;
+            } else {
+                heartCounter.textContent = `Рекорд нежности: ${tapCount}! Жми кнопку ниже 👇`;
+            }
+
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.textContent = ['♥', '✨', '💖'][Math.floor(Math.random() * 3)];
+            
+            const rect = heartBtn.getBoundingClientRect();
+            const randomX = (Math.random() - 0.5) * 60;
+            heart.style.left = `${rect.left + rect.width / 2 + randomX}px`;
+            heart.style.top = `${rect.top}px`;
+            heart.style.color = '#ff5e8e';
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1400);
+        });
+
+        // Запуск
+        initDailyContent();
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
